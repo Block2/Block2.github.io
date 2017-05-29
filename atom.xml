@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>Xuwenfeng</title>
   <subtitle>Nam et libertas(拉) 为了上帝和自由</subtitle>
-  <link href="https://Block2.github.io/atom.xml" rel="self"/>
+  <link href="/atom.xml" rel="self"/>
   
   <link href="https://Block2.github.io/"/>
   <updated>2017-05-29T08:45:20.351Z</updated>
