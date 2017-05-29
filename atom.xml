@@ -4,9 +4,9 @@
   <subtitle>Nam et libertas(拉) 为了上帝和自由</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://Block2.github.io/"/>
+  <link href="https://Block2.github.io/"/>
   <updated>2017-05-29T08:45:20.351Z</updated>
-  <id>http://Block2.github.io/</id>
+  <id>https://Block2.github.io/</id>
   
   <author>
     <name>Xu wenfeng</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Hello World</title>
-    <link href="http://Block2.github.io/2017/05/29/hello-world/"/>
-    <id>http://Block2.github.io/2017/05/29/hello-world/</id>
+    <link href="https://Block2.github.io/2017/05/29/hello-world/"/>
+    <id>https://Block2.github.io/2017/05/29/hello-world/</id>
     <published>2017-05-29T08:45:20.340Z</published>
     <updated>2017-05-29T08:45:20.351Z</updated>
     
@@ -40,7 +40,7 @@
     </summary>
     
     
-      <category term="java" scheme="http://Block2.github.io/tags/java/"/>
+      <category term="java" scheme="https://Block2.github.io/tags/java/"/>
     
   </entry>
   
