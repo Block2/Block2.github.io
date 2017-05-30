@@ -3,23 +3,78 @@
   
     
     <entry>
-      <title><![CDATA[Hello World]]></title>
-      <url>/2017/05/29/hello-world/</url>
-      <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+      <title><![CDATA[Java中字符集的处理]]></title>
+      <url>/2017/05/29/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86/</url>
+      <content type="html"><![CDATA[<hr>
+<h2 id="设计Java历史背景以及其特点"><a href="#设计Java历史背景以及其特点" class="headerlink" title="设计Java历史背景以及其特点"></a>设计Java历史背景以及其特点</h2><pre><code>Java的设计之初是为了用于像有线电视转换盒一样的消费设备。由于这类设备的处理能力和内存都很有限，所以语言必须要非常小并且能够生成非常紧凑的代码。另外，由于不同的厂商会选择不同的CPU（指令集会不一致），所以这种语言需要设计成不能与任何特定的体系结构捆绑在一起。
+</code></pre><p>Java的设计模型源于pascal的发明者Niklaus Wirth 设计出的一种为假想的机器生成中间代码的可移植性语言。（假想的机器被称为虚拟机。Java虚拟机JVM的命名由此而来）</p>
+<p>Java设计出来的数据类型都是固定存储大小。比如，int为32位，short为16位。这样设计的原因Java程序必须要保证在所有机器上都能够得到相同的运算结果。所以每一种数据类型的取值范围必须固定。</p>
+<p>与此相比，C或者C++需要对不同的指令集（CPU）选择最为有效的的整形，这样就有可能造成一个在32位处理器上运行很好但是在16位系统上运行却发生整数溢出。</p>
+<hr>
+<h2 id="Java的char类型以及Unicode编码表的由来"><a href="#Java的char类型以及Unicode编码表的由来" class="headerlink" title="Java的char类型以及Unicode编码表的由来"></a>Java的char类型以及Unicode编码表的由来</h2><p>在Java里面有8种基础类型，4种整型，2中浮点类型，1种用于表示真值的boolean类型，<strong>一种用于表示Unicode的字符单元的字符类型char类型。</strong></p>
+<p>char类型用于表示单个字符。通常用来表示字符常量。例如‘A’编码为65所对应的字符常量。又例如public static void main(String\u005B\u005D args）也是符合语法规则。</p>
+<p>要想弄清楚char，就应该需要了解Unicode编码表。</p>
+<p>Unicode打破了传统字符编码方法的限制。在Unicode出现之前，已经有了很多不同的标准：美国的ASCII、西欧语言中的ISO8859-1、俄国的KOI-8、中国的GB 18030和BIG-5等。这样就产生了两个问题：</p>
+<blockquote>
+<ul>
+<li>对于任意给定的代码值比如56，在不同的编码方案下可能对应不同的字母；</li>
+<li>采用大字符集的语言其编码长度有可能不同。例如，有些常用的字符采用单字节编码，而另外一些字符则需要两个或更多个字节。</li>
+</ul>
+</blockquote>
+<p>设计Unicode编码的目的就是为了解决这些问题。在20世纪80年代开启设计工作时，人们认为两个字节的代码宽度足以应对世界上各种语言的所有字符编码，并有足够的空间留给未来扩张。在设计JAVA的时候就决定采用了16位的Unicode字符集。</p>
+<p>不过很遗憾的是，Unicode字符超过了65536个，主要原因是增加了大量的汉语，日语等表意文字。现在16位的char类型已经不足以满足所有的Unicode字符的需要了。</p>
+<p>Java语言为了需要解决这个问题。char类型用UTF-16编码来描述一个代码单元。</p>
+<p>至于为什么char类型采用UTF-16编码能解决这个问题，首先需要解释两个概念：代码点和代码单元</p>
+<p>从JDK5.0开始，代码点（code point）是指与一个编码表中的某个字符对应的代码值。在Unicode标准中，代码点采用十六进制书写，并加上前缀U+，例如U+0041（即十进制的65）就是字母‘A’的代码点。代码点可以分成17个代码级别，第一个代码级别称为“基本的多语言级别”，代码点从U+0000到U+FFFF，其中包括了经典的Unicode代码，其他的16个附加级别，代码点从U+10000到U+10FFFF。</p>
+<p>UTF-16采用不同长度的编码表示所有的Unicode代码点。，在“基本的多语言级别”中，每个字符用16位表示，通常被称为代码单元（code unit）。而辅助字符采用一对连续的代码单元进行编码。这样构成的编码值一定落入基本的多语言级别中空闲的2048字节内，通常被称为替代区域。【U+D800-U+DBFF用于第一个代码单元】，【U+DC00~U+DFFF用于第二个代码单元】。这样设计十分巧妙。我们可以迅速的知道第一个代码单元是一个字符的编码还是一个辅助字符的第一或第二部分。例如代码点为U+1D56B就有两个代码单元U+D835和U+DD6B编码的。</p>
+<p>为此，强烈建议不要使用char类型。除非确实需要对UTF-16代码单元进行操作。（原因是char类型变量取到的值仅仅只是16位，当读取的字符属于辅助字符时，16位的char类变量是仅仅只能取到辅助字符的第一个代码单元，会导致乱码）<br></p><p></p>
+<hr>
+<h2 id="Unicode编码的三种实现-UTF-16，UTF-32，UTF-8"><a href="#Unicode编码的三种实现-UTF-16，UTF-32，UTF-8" class="headerlink" title="Unicode编码的三种实现 UTF-16，UTF-32，UTF-8"></a>Unicode编码的三种实现 UTF-16，UTF-32，UTF-8</h2><p>UTF-16编码是java中字符类型采用的编码。是Unicode编码设计的一种实现。</p>
+<p>此外还有UTF-8和UTF-32编码也是Unicode的实现。</p>
+<p>其中UTF-16和UTF-32编码是Unicode设计的16位和32位实现。考虑到最初的实现，我们通常说的Unicode编码指的就是UTF-16编码。</p>
+<p>UTF-16长度相对固定，只要不处理大于U+200000范围的字符，每个Unicode代码点使用16位即2字节表示，超出部分使用两个UTF-16即4字节表示。</p>
+<p>UTF-32长度始终固定，每个Unicode代码点使用32位即4字节表示<br>由于UTF-16和UTF-32的Unicode实现采用的是相对固定长度来表示一个字符，占用的内存大小相对而言比较大。例如对于字母‘A’而言，本身一个字节8位就可以表示出来，但是采用UTF-16的情况下需要使用两个字节，UTF-32编码情况下需要4个字节才能表示。相对而言内存消耗是比较大的。</p>
+<p>UTF-8是一个可变长度的编码方式。它使用1~4个字节表示一个符号。根据符号的代码点而变化字节长度。</p>
+<p>UTF-8的编码规则很简单，只有二条： </p>
+<blockquote>
+<ul>
+<li>对于单字节的符号，字节的第一位设为0，后面7位为这个符号的unicode码。因此对于英语字母，UTF-8编码和ASCII码是相同的。’A’ 0041 U+0041 0100001 </li>
+<li>对于n字节的符号（n&gt;1），第一个字节的前n位都设为1，第n+1位设为0，后面字节的前两位一律设为10。剩下的没有提及的二进制位，全部为这个符号的unicode码。 </li>
+</ul>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">十六进制</th>
+<th style="text-align:left">二进制</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">0000 0000-0000 007F</td>
+<td style="text-align:left">0xxxxxxx</td>
+</tr>
+<tr>
+<td style="text-align:left">0000 0080-0000 07FF</td>
+<td style="text-align:left">110xxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td style="text-align:left">0000 0800-0000 FFFF</td>
+<td style="text-align:left">111xxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+<tr>
+<td style="text-align:left">0001 0000-0010 FFFF</td>
+<td style="text-align:left">11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</td>
+</tr>
+</tbody>
+</table>
+<p>下面，还是以汉字“严”为例，演示如何实现UTF-8编码。<br>已知“严”的unicode是4E25（100 1110 00 10 0101），根据上表，可以发现4E25处在第三行的范围内（0000 0800-0000 FFFF），因此“严”的UTF-8编码需要三个字节，即格式是“1110xxxx 10xxxxxx 10xxxxxx”。然后，从“严”的最后一个二进制位开始，依次从后向前填入格式中的x，多出的位补0。这样就得到了，“严”的UTF-8编码是“11100100 10111000 10100101”，转换成十六进制就是E4B8A5。 </p>
 ]]></content>
       
         
         <tags>
             
-            <tag> java </tag>
+            <tag> Java </tag>
             
         </tags>
         
