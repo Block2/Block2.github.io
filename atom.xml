@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Block2.github.io/"/>
-  <updated>2017-05-30T02:46:28.902Z</updated>
+  <updated>2017-05-30T03:07:00.774Z</updated>
   <id>https://Block2.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://Block2.github.io/2017/05/29/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86/"/>
     <id>https://Block2.github.io/2017/05/29/Java中字符集的处理/</id>
     <published>2017-05-29T12:16:55.000Z</published>
-    <updated>2017-05-30T02:46:28.902Z</updated>
+    <updated>2017-05-30T03:07:00.774Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h2 id="设计Java历史背景以及其特点"><a href="#设计Java历史背景以及其特点" class="headerlink" title="设计Java历史背景以及其特点"></a>设计Java历史背景以及其特点</h2><p>Java的设计之初是为了用于像有线电视转换盒一样的消费设备。由于这类设备的处理能力和内存都很有限，所以语言必须要非常小并且能够生成非常紧凑的代码。另外，由于不同的厂商会选择不同的CPU（指令集会不一致），所以这种语言需要设计成不能与任何特定的体系结构捆绑在一起。</p>
@@ -44,7 +44,7 @@
 <p>至于为什么char类型采用UTF-16编码能解决这个问题，首先需要解释两个概念：<strong>代码点</strong>和<strong>代码单元</strong></p>
 <p>从JDK5.0开始，<strong>代码点（code point）是指与一个编码表中的某个字符对应的代码值</strong>。在Unicode标准中，代码点采用十六进制书写，并加上前缀U+，例如U+0041（即十进制的65）就是字母‘A’的代码点。代码点可以分成17个代码级别，第一个代码级别称为“基本的多语言级别”，代码点从U+0000到U+FFFF，其中包括了经典的Unicode代码，其他的16个附加级别，代码点从U+10000到U+10FFFF。</p>
 <p>UTF-16采用不同长度的编码表示所有的Unicode代码点。<strong>在“基本的多语言级别”中，每个字符用16位表示，通常被称为代码单元（code unit）</strong>。而辅助字符采用一对连续的代码单元进行编码。这样构成的编码值一定落入基本的多语言级别中空闲的2048字节内，通常被称为替代区域。【U+D800-U+DBFF用于第一个代码单元】，【U+DC00~U+DFFF用于第二个代码单元】。这样设计十分巧妙。我们可以迅速的知道第一个代码单元是一个字符的编码还是一个辅助字符的第一或第二部分。例如代码点为U+1D56B就有两个代码单元U+D835和U+DD6B编码的。</p>
-<p>为此，<strong>强烈建议不要使用char类型</strong>。除非确实需要对UTF-16代码单元进行操作。（原因是char类型变量取到的值仅仅只是16位，当读取的字符属于辅助字符时，16位的char类变量是仅仅只能取到辅助字符的第一个代码单元，会导致乱码）<br></p><p></p>
+<p>为此，<strong>强烈建议不要使用char类型</strong>。除非确实需要对UTF-16代码单元进行操作。（原因是char类型变量取到的值仅仅只是16位，当读取的字符属于辅助字符时，16位的char类变量是仅仅只能取到辅助字符的第一个代码单元，会导致乱码）</p>
 <hr>
 <h2 id="Unicode编码的三种实现-UTF-16，UTF-32，UTF-8"><a href="#Unicode编码的三种实现-UTF-16，UTF-32，UTF-8" class="headerlink" title="Unicode编码的三种实现 UTF-16，UTF-32，UTF-8"></a>Unicode编码的三种实现 UTF-16，UTF-32，UTF-8</h2><p>UTF-16编码是java中字符类型采用的编码。是Unicode编码设计的一种实现。</p>
 <p>此外还有UTF-8和UTF-32编码也是Unicode的实现。</p>
