@@ -201,6 +201,74 @@
     <header class="post-header">
       <h1 class="post-title">
         
+          <a class="post-link" href="/2017/05/31/Java内部类/">Java内部类</a>
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          May 31, 2017
+        </span>
+      </div>
+    </header>
+
+    
+    
+
+    <div class="post-content">
+      
+        
+        
+
+        
+          <hr>
+<h2 id="Java内部类"><a href="#Java内部类" class="headerlink" title="Java内部类"></a>Java内部类</h2><p>内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：</p>
+<blockquote>
+<p><em>1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。
+</em>2.内部类可以对同一个包中的其他类隐藏起来<br>*3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。</p>
+</blockquote>
+<p>内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为<strong>普通内部类</strong>、<strong>局部内部类</strong>、<strong>匿名内部类</strong>、<strong>静态内部类</strong>。</p>
+<p>内部类的语法比较复杂。内部类是一种编译器现象，在编译过程中，编译器会为其做不少的工作。比如<strong>编译器会把内部类翻译成用$分隔外部类名与内部类名的常规类文件，但是jvm对此一无所知</strong>。在局部内部类中编译器会为每一个由外部传入的局部变量建立相应的数据域。</p>
+<hr>
+<h2 id="普通内部类-使用内部类访问对象状态"><a href="#普通内部类-使用内部类访问对象状态" class="headerlink" title="普通内部类 使用内部类访问对象状态"></a>普通内部类 使用内部类访问对象状态</h2><p>在下面的示例代码中，将会体会内部类如何访问外部类对象的状态，此代码实现一个时钟效果，每秒钟会产生一个通告并且鸣出一声<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">TalkingClock</span></span>&#123;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">int</span> interval;</div><div class="line">	<span class="keyword">private</span> <span class="keyword">boolean</span> beep;	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="title">TalkingClock</span><span class="params">(<span class="keyword">int</span> interval, <span class="keyword">boolean</span> beep)</span></span>&#123;</div><div class="line">		<span class="keyword">this</span>.interval = interval;</div><div class="line">		<span class="keyword">this</span>.beep = beep;</div><div class="line">	&#125;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">		ActionListener listener = <span class="keyword">new</span> TimePrinter();</div><div class="line">		Timer t = <span class="keyword">new</span> Timer(interval,listener);</div><div class="line">		t.start();</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">TimePrinter</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">			Date now = <span class="keyword">new</span> Date();</div><div class="line">			System.out.println(<span class="string">"At the tone , the time is "</span>+ now);</div><div class="line">			<span class="keyword">if</span>(beep) </div><div class="line">				Toolkit.getDefaultToolkit().beep();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>在外围类的作用域之外，可以这样引用内部类：<br>   OuterClass.InnerClass<br>eg: TalkingClock job = new TalkingClock(1000,true);<br>   TalkingClock.TimePrinter listener = job.new TimePrinter();</p>
+</blockquote>
+<p>在对文件进行编译的过程中,会生成TalkingClock$TimePrinter.class类文件。通过反射技术可以得到如下的大致内容是</p>
+<p><block><br>public class TalkingClock$TimePrinter{<br>    public TalkingClock$TimePrinter(TalkingCLock);<br>    final TalkingClock this$0;<br>    public void actionPerformed(java.awt.event.ActionEvent);<br>}<br></block><br>编译器为了引用外围类，生成了一个附加的实例域this$0 (名字this$0是由编译器合成的，在自己的代码中不能够引用它)。另外还可以看到构造器的TalkingClock参数。</p>
+<p>在普通的内部类中，除了其外部类知道它的存在外,对其他的包级类都隐藏了起来。</p>
+<hr>
+<h2 id="局部内部类"><a href="#局部内部类" class="headerlink" title="局部内部类"></a>局部内部类</h2><p>在上面TalkingClock代码中可以发现,内部类TimePrinter这个类名字只在start方法里创建这个类型对象时使用了一次。当遇到这种情况的时候，可以<strong>在一个方法里面定义局部内部类</strong>。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span></span>&#123;</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">TimePrinter</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">			Date now = <span class="keyword">new</span> Date();</div><div class="line">			System.out.println(<span class="string">"At the tone , the time is "</span>+ now);</div><div class="line">			<span class="keyword">if</span>(beep) </div><div class="line">				Toolkit.getDefaultToolkit().beep();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	ActionListener listener = <span class="keyword">new</span> TimePrinter();</div><div class="line">	Timer t = <span class="keyword">new</span> Timer(interval,listener);</div><div class="line">	t.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>局部内部类不能使用public或private访问说明符进行声明。它的作用域被限制在这个声明这个局部内部类的块中。</p>
+<p>局部内部类有一个优势，即对外完全隐藏。除了start方法之外，没有任何方法知道TimePrinter类的存在，TalkingClock类也不知道。</p>
+<p>和其他内部类相比，局部内部类还有一个优点，他们不仅能够访问包含他们的内部类，还可以访问局部变量。不过这些局部变量需要被声明为final。下例将给出说明：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(<span class="keyword">int</span> interval ,<span class="keyword">final</span> <span class="keyword">boolean</span> beep)</span></span>&#123;</div><div class="line">	<span class="class"><span class="keyword">class</span> <span class="title">TimePrinter</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">			Date now = <span class="keyword">new</span> Date();</div><div class="line">			System.out.println(<span class="string">"At the tone , the time is "</span>+ now);</div><div class="line">			<span class="keyword">if</span>(beep) </div><div class="line">				Toolkit.getDefaultToolkit().beep();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	ActionListener listener = <span class="keyword">new</span> TimePrinter();</div><div class="line">	Timer t = <span class="keyword">new</span> Timer(interval,listener);</div><div class="line">	t.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>在此。我们考察一下start方法的控制流程</p>
+<blockquote>
+<p>1.调用start方法<br>2.调用内部类TimePrinter的构造器,以便初始化对象变量的值<br>3.将listener引用传递给Timer构造器，定时器开始计时，start方法结束。此时，start方法的beep参数不复存在。<br>4.然后，actionPerformed方法执行if(beep)…。<br>为了让actionPerformed方法工作，TImePrinter类在beep域释放之前将beep域start方法的局部变量进行备份。<br>反编译一下TalkingClock$TimePrinter类会得到下述结果：</p>
+<p><block><br>public class TalkingClock$TimePrinter{<br>    public TalkingClock$TimePrinter(TalkingCLock，boolean);<br>    final TalkingClock this$0;<br>    final boolean val$beep;<br>    public void actionPerformed(java.awt.event.ActionEvent);<br>}<br></block><br>注意构造器的boolean参数和val$beep实例变量。当创建一个对象的时候，beep就会被传递给构造器，并储存在val$beep这个final域里面。在start方法里面将beep参数声明成final，对它进行初始化后不能够在此修改。因此，就使得局部变量和局部类内建立的拷贝保持一致。</p>
+<hr>
+<h2 id="匿名内部类"><a href="#匿名内部类" class="headerlink" title="匿名内部类"></a>匿名内部类</h2><p>将局部内部类再往下深入一步，假如只创建这个类的一个对象，就不需要命名了。此时类被称为匿名内部类。<br>匿名内部类的语法如下所示：<br>new SuperType(construcation parameters){<br>   innner class method and data<br>}<br>例子如下：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(<span class="keyword">int</span> interval ,<span class="keyword">final</span> <span class="keyword">boolean</span> beep)</span></span>&#123;</div><div class="line">	ActionListener listener = <span class="keyword">new</span> ActionListener()&#123;</div><div class="line">		<span class="meta">@Override</span></div><div class="line">		<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">			Date now = <span class="keyword">new</span> Date();</div><div class="line">			System.out.println(<span class="string">"At the tone , the time is "</span>+ now);</div><div class="line">			<span class="keyword">if</span>(beep) </div><div class="line">				Toolkit.getDefaultToolkit().beep();</div><div class="line">		&#125;</div><div class="line">	&#125;;</div><div class="line">	Timer t = <span class="keyword">new</span> Timer(interval,listener);</div><div class="line">	t.start();</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<h2 id="静态内部类"><a href="#静态内部类" class="headerlink" title="静态内部类"></a>静态内部类</h2><p>有时候使用内部类只是只是为了将类隐藏在另一个类里面，而不需要内部类去引用外围类对象的。此时，可以将内部类声明为static，以取消对外围类的引用。将TimePrinter类中去掉外围类的beep对象变量，就可以将TimePrinter声明为static。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">TimePrinter</span> <span class="keyword">implements</span> <span class="title">ActionListener</span></span>&#123;</div><div class="line">	<span class="meta">@Override</span></div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">actionPerformed</span><span class="params">(ActionEvent e)</span> </span>&#123;</div><div class="line">		Date now = <span class="keyword">new</span> Date();</div><div class="line">		System.out.println(<span class="string">"At the tone , the time is "</span>+ now);</div><div class="line">		Toolkit.getDefaultToolkit().beep();</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p><strong>注意：只有内部类可以声明为static &amp;&amp; 声明在接口中的内部类自动成为static和public类</strong> </p>
+
+        
+      
+    </div>
+
+    
+
+    
+
+  </article>
+
+    
+      
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
           <a class="post-link" href="/2017/05/29/Java中字符集的处理/">Java中字符集的处理</a>
         
       </h1>
