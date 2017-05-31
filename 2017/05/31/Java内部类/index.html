@@ -34,17 +34,17 @@
 <link rel="canonical" href="https://Block2.github.io/2017/05/31/Java内部类/"/>
 
 
-<meta name="description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：   1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 2.内部类可以对同一个包中的其他类隐藏起来 3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。   内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部">
+<meta name="description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：  1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。2.内部类可以对同一个包中的其他类隐藏起来3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。  内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部类、静态">
 <meta name="keywords" content="Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Java内部类">
 <meta property="og:url" content="https://Block2.github.io/2017/05/31/Java内部类/index.html">
 <meta property="og:site_name" content="Xuwenfeng">
-<meta property="og:description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：   1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 2.内部类可以对同一个包中的其他类隐藏起来 3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。   内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部">
-<meta property="og:updated_time" content="2017-05-31T09:27:26.816Z">
+<meta property="og:description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：  1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。2.内部类可以对同一个包中的其他类隐藏起来3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。  内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部类、静态">
+<meta property="og:updated_time" content="2017-05-31T09:52:56.421Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Java内部类">
-<meta name="twitter:description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：   1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。 2.内部类可以对同一个包中的其他类隐藏起来 3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。   内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部">
+<meta name="twitter:description" content="Java内部类内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：  1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。2.内部类可以对同一个包中的其他类隐藏起来3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。  内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为普通内部类、局部内部类、匿名内部类、静态">
 
 
 <link rel="stylesheet" type="text/css" href="/css/style.css?v=2.4.x" />
@@ -234,11 +234,7 @@
         <hr>
 <h2 id="Java内部类"><a href="#Java内部类" class="headerlink" title="Java内部类"></a>Java内部类</h2><p>内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：</p>
 <blockquote>
-<ul>
-<li>1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。</li>
-<li>2.内部类可以对同一个包中的其他类隐藏起来</li>
-<li>3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。</li>
-</ul>
+<p>1.内部类方法可以访问该类定义所在的作用域中的数据，包括私有的数据。<br>2.内部类可以对同一个包中的其他类隐藏起来<br>3.当想要定义一个回调函数且不想编写大量代码的时候，可以使用匿名内部类比较方便。</p>
 </blockquote>
 <p>内部类按照不同的应用形式和需求场景分为四种，我在这里将其称之为<strong>普通内部类</strong>、<strong>局部内部类</strong>、<strong>匿名内部类</strong>、<strong>静态内部类</strong>。</p>
 <p>内部类的语法比较复杂。内部类是一种编译器现象，在编译过程中，编译器会为其做不少的工作。比如<strong>编译器会把内部类翻译成用$分隔外部类名与内部类名的常规类文件，但是jvm对此一无所知</strong>。在局部内部类中编译器会为每一个由外部传入的局部变量建立相应的数据域。</p>
