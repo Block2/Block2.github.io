@@ -4,9 +4,9 @@
   <subtitle>Nam et libertas(拉) 为了上帝和自由</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="https://Block2.github.io/"/>
+  <link href="xuwenfeng.win/"/>
   <updated>2017-06-01T01:13:27.047Z</updated>
-  <id>https://Block2.github.io/</id>
+  <id>xuwenfeng.win/</id>
   
   <author>
     <name>Xu wenfeng</name>
@@ -17,8 +17,8 @@
   
   <entry>
     <title>Java内部类</title>
-    <link href="https://Block2.github.io/2017/05/31/Java%E5%86%85%E9%83%A8%E7%B1%BB/"/>
-    <id>https://Block2.github.io/2017/05/31/Java内部类/</id>
+    <link href="xuwenfeng.win/2017/05/31/Java%E5%86%85%E9%83%A8%E7%B1%BB/"/>
+    <id>xuwenfeng.win/2017/05/31/Java内部类/</id>
     <published>2017-05-31T06:08:08.000Z</published>
     <updated>2017-06-01T01:13:27.047Z</updated>
     
@@ -75,14 +75,14 @@
     </summary>
     
     
-      <category term="Java" scheme="https://Block2.github.io/tags/Java/"/>
+      <category term="Java" scheme="xuwenfeng.win/tags/Java/"/>
     
   </entry>
   
   <entry>
     <title>Java中字符集的处理</title>
-    <link href="https://Block2.github.io/2017/05/29/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86/"/>
-    <id>https://Block2.github.io/2017/05/29/Java中字符集的处理/</id>
+    <link href="xuwenfeng.win/2017/05/29/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86/"/>
+    <id>xuwenfeng.win/2017/05/29/Java中字符集的处理/</id>
     <published>2017-05-29T12:16:55.000Z</published>
     <updated>2017-05-31T03:37:38.911Z</updated>
     
@@ -160,7 +160,7 @@
     </summary>
     
     
-      <category term="Java" scheme="https://Block2.github.io/tags/Java/"/>
+      <category term="Java" scheme="xuwenfeng.win/tags/Java/"/>
     
   </entry>
   
