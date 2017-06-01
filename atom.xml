@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://Block2.github.io/"/>
-  <updated>2017-05-31T09:57:13.949Z</updated>
+  <updated>2017-05-31T10:53:59.664Z</updated>
   <id>https://Block2.github.io/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="https://Block2.github.io/2017/05/31/Java%E5%86%85%E9%83%A8%E7%B1%BB/"/>
     <id>https://Block2.github.io/2017/05/31/Java内部类/</id>
     <published>2017-05-31T06:08:08.000Z</published>
-    <updated>2017-05-31T09:57:13.949Z</updated>
+    <updated>2017-05-31T10:53:59.664Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h2 id="Java内部类"><a href="#Java内部类" class="headerlink" title="Java内部类"></a>Java内部类</h2><p>内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：</p>
