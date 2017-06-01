@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="xuwenfeng.win/"/>
-  <updated>2017-06-01T10:56:55.036Z</updated>
+  <updated>2017-06-01T11:01:54.290Z</updated>
   <id>xuwenfeng.win/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="xuwenfeng.win/2017/05/31/Java%E5%86%85%E9%83%A8%E7%B1%BB/"/>
     <id>xuwenfeng.win/2017/05/31/Java内部类/</id>
     <published>2017-05-31T06:08:08.000Z</published>
-    <updated>2017-06-01T10:56:55.036Z</updated>
+    <updated>2017-06-01T11:01:54.290Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h2 id="Java内部类"><a href="#Java内部类" class="headerlink" title="Java内部类"></a>Java内部类</h2><p>内部类（inner class）是定义在另一个类中的类。使用内部类的原因主要有三个：</p>
@@ -75,7 +75,7 @@
     </summary>
     
     
-      <category term="-Java" scheme="xuwenfeng.win/tags/Java/"/>
+      <category term="Java" scheme="xuwenfeng.win/tags/Java/"/>
     
   </entry>
   
@@ -84,7 +84,7 @@
     <link href="xuwenfeng.win/2017/05/29/Java%E4%B8%AD%E5%AD%97%E7%AC%A6%E9%9B%86%E7%9A%84%E5%A4%84%E7%90%86/"/>
     <id>xuwenfeng.win/2017/05/29/Java中字符集的处理/</id>
     <published>2017-05-29T12:16:55.000Z</published>
-    <updated>2017-06-01T10:56:52.669Z</updated>
+    <updated>2017-06-01T11:01:50.462Z</updated>
     
     <content type="html"><![CDATA[<hr>
 <h2 id="设计Java历史背景以及其特点"><a href="#设计Java历史背景以及其特点" class="headerlink" title="设计Java历史背景以及其特点"></a>设计Java历史背景以及其特点</h2><p>Java的设计之初是为了用于像有线电视转换盒一样的消费设备。由于这类设备的处理能力和内存都很有限，所以语言必须要非常小并且能够生成非常紧凑的代码。另外，由于不同的厂商会选择不同的CPU（指令集会不一致），所以这种语言需要设计成不能与任何特定的体系结构捆绑在一起。</p>
@@ -160,7 +160,7 @@
     </summary>
     
     
-      <category term="-Java" scheme="xuwenfeng.win/tags/Java/"/>
+      <category term="Java" scheme="xuwenfeng.win/tags/Java/"/>
     
   </entry>
   
